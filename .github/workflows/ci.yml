@@ -30,8 +30,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install fastapi uvicorn scikit-learn joblib pytest httpx ruff
 
-      - name: Run tests
-        run: pytest -v
+      -      - name: Run tests
+        env:
+          PYTHONPATH: .
+        run: python -m pytest -v
 
       - name: Run lint
         run: ruff check src tests
