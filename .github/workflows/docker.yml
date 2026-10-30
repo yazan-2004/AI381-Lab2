@@ -40,7 +40,7 @@ jobs:
           docker build -t "$IMAGE:${GITHUB_SHA}" .
 
       - name: Scan image with Trivy
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: ghcr.io/${{ github.repository }}:${{ github.sha }}
           format: table
@@ -53,3 +53,4 @@ jobs:
         run: |
           IMAGE="ghcr.io/${GITHUB_REPOSITORY,,}"
           docker push "$IMAGE:${GITHUB_SHA}"
+
