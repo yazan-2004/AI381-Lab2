@@ -30,6 +30,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install fastapi uvicorn scikit-learn joblib pytest httpx ruff
 
+      - name: Train model
+        run: python src/train/train.py
+
       - name: Run tests
         env:
           PYTHONPATH: .
@@ -37,4 +40,5 @@ jobs:
 
       - name: Run lint
         run: ruff check src tests
+
 
