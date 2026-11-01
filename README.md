@@ -13,13 +13,16 @@ This project trains a machine learning model to classify Iris flowers using four
 The trained model is exposed through a REST API.
 
 ## Technologies
-- Python
+
+- Python 3.11
 - scikit-learn
 - FastAPI
 - pytest
 - Ruff
-- Docker (pending setup)
-- GitHub Actions (pending setup)
+- Docker
+- GitHub Actions
+- Trivy
+- GitHub Container Registry (GHCR)
 
 ## API Endpoints
 
@@ -32,7 +35,6 @@ Returns the application health status.
 `POST /predict`
 
 Example request:
-
 ```json
 {
   "sepal_length": 5.1,
@@ -40,51 +42,3 @@ Example request:
   "petal_length": 1.4,
   "petal_width": 0.2
 }
-```
-
-Example response:
-
-```json
-{
-  "prediction": 0,
-  "species": "setosa"
-}
-```
-
-## Run Locally
-
-Train the model:
-
-```powershell
-.\.venv\Scripts\python.exe src\train\train.py
-```
-
-Start the API:
-
-```powershell
-.\.venv\Scripts\python.exe -m uvicorn src.app.main:app --reload
-```
-
-Open the interactive API documentation at `http://127.0.0.1:8000/docs`.
-
-## Run Tests
-
-```powershell
-.\.venv\Scripts\python.exe -m pytest -v
-```
-
-## Code Quality
-
-```powershell
-.\.venv\Scripts\python.exe -m ruff check src tests
-```
-
-## Project Status
-
-- [x] Model training
-- [x] FastAPI endpoints
-- [x] Five automated tests
-- [x] Ruff code-quality check
-- [ ] Docker image build and scan
-- [ ] GitHub Actions CI workflow
-- [ ] Publish image to GitHub Container Registry
