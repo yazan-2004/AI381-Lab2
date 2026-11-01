@@ -21,6 +21,8 @@ RUN useradd --create-home appuser
 
 COPY --from=builder /install /usr/local
 
+RUN python -m pip uninstall -y setuptools
+
 COPY src/ ./src/
 COPY model.joblib ./model.joblib
 
