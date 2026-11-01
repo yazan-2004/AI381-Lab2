@@ -1,14 +1,26 @@
+
+# Stage 1: Builder
+FROM python:3.11-slim AS builder
+
+WORKDIR /build
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
+
+# Stage 2: Runtime
 FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH=/app
 
 WORKDIR /app
 
 RUN useradd --create-home appuser
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt && pip install --no-cache-dir "jaraco.context>=6.1.0" "wheel>=0.46.2" && pip uninstall -y setuptools
+COPY --from=builder /install /usr/local
+
 COPY src/ ./src/
 COPY model.joblib ./model.joblib
 
